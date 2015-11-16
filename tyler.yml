@@ -90,6 +90,6 @@
         - viscosity
         - transmission
 
-    - name: Clone projects from Pebble github
+    - name: Clone Pebble projects
       git: repo=git@github.com:pebble/{{ item }}.git dest={{ dev_dir }}/{{ item }}
-      with_items: projects
+      with_items: pebble_projects
