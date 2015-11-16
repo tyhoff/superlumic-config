@@ -97,12 +97,6 @@
         - viscosity
         - transmission
 
-    - name: Clone projects
-      # I set force and update to no so that if I have any working changes or changes that I haven't pushed up it doesn't reset my local history.
-      git: repo=git@github.com:pebble/tyler-landfill/{{ item }}.git dest={{ dev_dir }}/.{{ item }} force=no update=no
-      with_items:
-        - dotfiles
-
     - name: Clone projects from Pebble github
       git: repo={{ item.git }} dest={{ dest_dir }}/{{ item.path }}
       with_items: projects
