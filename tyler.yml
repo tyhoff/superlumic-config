@@ -3,6 +3,9 @@
 - hosts: 127.0.0.1
   connection: local
 
+  roles:
+    - "roderik.superlumic-sublimetext"
+
   vars:
     - computername: applez
     - git_user_name: Tyler Hoffman
@@ -89,6 +92,9 @@
         - clion
         - viscosity
         - transmission
+
+    - name: Create development folder
+      file: path={{ dev_dir }} state=directory
 
     - name: Clone Pebble projects
       git: repo=git@github.com:pebble/{{ item }}.git dest={{ dev_dir }}/{{ item }}
