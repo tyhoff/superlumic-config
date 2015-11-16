@@ -23,18 +23,11 @@
           repo: "https://github.com/alienhard/SublimeAllAutocomplete"
           version: "master"
 
-    - projects: # An array of projects to get setup
-      - name: tintin
-        git: git@github.com:pebble/tintin.git
-
-      - name: libpebble-dev
-        git: git@github.com:pebble/libpebble-dev.git
-
-      - name: libpebble2-dev
-        git: git@github.com:pebble/libpebble2-dev.git
-
-      - name: pebble-tool-dev
-        git: git@github.com:pebble/pebble-tool-dev.git
+    - pebble_projects: # An array of projects to get setup
+      - tintin
+      - libpebble-dev
+      - libpebble2-dev
+      - pebble-tool-dev
 
   tasks:
     - name: homebrew taps
@@ -98,5 +91,5 @@
         - transmission
 
     - name: Clone projects from Pebble github
-      git: repo={{ item.git }} dest={{ dev_dir }}/{{ item.path }}
+      git: repo=git@github.com:pebble/{{ item }}.git dest={{ dev_dir }}/{{ item }}
       with_items: projects
