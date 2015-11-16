@@ -26,19 +26,15 @@
     - projects: # An array of projects to get setup
       - name: tintin
         git: git@github.com:pebble/tintin.git
-        path: "{{dev_dir}}/tintin"
 
       - name: libpebble-dev
         git: git@github.com:pebble/libpebble-dev.git
-        path: "{{dev_dir}}/libpebble-dev"
 
       - name: libpebble2-dev
         git: git@github.com:pebble/libpebble2-dev.git
-        path: "{{dev_dir}}/libpebble2-dev"
 
       - name: pebble-tool-dev
         git: git@github.com:pebble/pebble-tool-dev.git
-        path: "{{dev_dir}}/pebble-tool-dev"
 
   tasks:
     - name: homebrew taps
@@ -99,9 +95,14 @@
         - virtualbox-extension-pack
         - clion
         - viscosity
+        - transmission
 
-    - name: Clone dotfiles
+    - name: Clone projects
       # I set force and update to no so that if I have any working changes or changes that I haven't pushed up it doesn't reset my local history.
-      git: repo=git@github.com:pebble/tyler-landfill/{{ item }}.git dest={{ home }}/.{{ item }} force=no update=no
+      git: repo=git@github.com:pebble/tyler-landfill/{{ item }}.git dest={{ dev_dir }}/.{{ item }} force=no update=no
       with_items:
         - dotfiles
+
+    - name: Clone projects from Pebble github
+      git: repo={{ item.git }} dest={{ dest_dir }}/{{ item.path }}
+      with_items: projects
