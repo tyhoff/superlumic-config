@@ -23,9 +23,7 @@
         - freetype
         - llvm
         - libgit2
-        - grep
         - pypy
-        - ragel
         - gettext
         - lcov
         - cppcheck
