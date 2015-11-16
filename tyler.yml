@@ -98,5 +98,5 @@
         - transmission
 
     - name: Clone projects from Pebble github
-      git: repo={{ item.git }} dest={{ dest_dir }}/{{ item.path }}
+      git: repo={{ item.git }} dest={{ dev_dir }}/{{ item.path }}
       with_items: projects
