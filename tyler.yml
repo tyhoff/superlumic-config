@@ -7,8 +7,8 @@
     - name: Brew tapping
       homebrew_tap: name={{item}} state=present
       with_items: 
-      - caskroom/versions
-      - pebble/homebrew-pebble-fw
+        - pebble/homebrew-pebble-fw
+        - caskroom/versions
 
     - name: Install libraries with homebrew
       homebrew: name={{item}} state=present
