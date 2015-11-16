@@ -12,6 +12,9 @@
     - git_user_email: tyhoffman1@gmail.com
     - local_home: "{{ lookup('env','HOME') }}"
     - dev_dir: "{{local_home}}/dev"
+
+    - sublime_text_color_scheme: "Packages/Color Scheme - Default/Monokai.tmTheme"
+    - sublime_text_theme: ""
     - sublime_packages:
         - dest: "GitGutter"
           repo: "https://github.com/jisaacks/GitGutter.git"
@@ -35,7 +38,7 @@
   tasks:
     - name: homebrew taps
       homebrew_tap: name={{item}} state=present
-      with_items: 
+      with_items:
         - pebble/pebble-fw
         - caskroom/versions
 
