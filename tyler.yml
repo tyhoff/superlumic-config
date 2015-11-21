@@ -5,6 +5,8 @@
 
   roles:
     # - roderik.superlumic-sublimetext
+    # TODO: Replace with osx_defaults extras module when Ansible 2.0 is released.
+    - roderik.superlumic-osx-defaults
     - clion
     - gitconfig
     - firmware
