@@ -195,7 +195,7 @@
       - domain: 'NSGlobalDomain'
         key: 'NSAutomaticDashSubstitutionEnabled'
         type: bool
-        key: false
+        value: false
       # Show battery percentage
       - domain: 'com.apple.menuextra.battery'
         key: 'ShowPercent'
