@@ -4,57 +4,74 @@
   connection: local
 
   roles:
-    - "roderik.superlumic-sublimetext"
+    # - roderik.superlumic-sublimetext
+    - clion
+    - gitconfig
+    - firmware
 
   vars:
-    - computername: applez
-    - git_user_name: Tyler Hoffman
-    - git_user_email: tyhoffman1@gmail.com
-    - local_home: "{{ lookup('env','HOME') }}"
-    - dev_dir: "{{local_home}}/dev"
+    computername: applez
 
-    - sublime_text_color_scheme: "Packages/Color Scheme - Default/Monokai.tmTheme"
-    - sublime_text_theme: "Default.sublime-theme"
-    - sublime_packages:
-        - dest: "Modific"
-          repo: "https://github.com/gornostal/Modific"
-          version: "master"
-        - dest: "AdvancedNewFile"
-          repo: "https://github.com/skuroda/Sublime-AdvancedNewFile"
-          version: "master"
-        - dest: "Git"
-          repo: "https://github.com/kemayo/sublime-text-git"
-          version: "master"
-        - dest: InsertNums
-          repo: "https://github.com/jbrooksuk/InsertNums"
-          version: "master"
-        - dest: "PrettyJSON"
-          repo: "https://github.com/dzhibas/SublimePrettyJson"
-          version: "master"
-        - dest: "TrailingSpaces"
-          repo: "https://github.com/SublimeText/TrailingSpaces"
-          version: "master"
-        - dest: "TableEditor"
-          repo: "https://github.com/vkocubinsky/SublimeTableEditor"
-          version: "master"
-        - dest: "GenerateUUID"
-          repo: "https://github.com/SublimeText/GenerateUUID"
-          version: "master"
-        - dest: "BracketHighlighter"
-          repo: "https://github.com/facelessuser/BracketHighlighter.git"
-          version: "master"
-        - dest: "ApplySyntax"
-          repo: "https://github.com/facelessuser/ApplySyntax.git"
-          version: "master"
-        - dest: "SublimeAllAutocomplete"
-          repo: "https://github.com/alienhard/SublimeAllAutocomplete"
-          version: "master"
+    # Git
+    git_user_name: Tyler Hoffman
+    git_user_email: tyhoffman1@gmail.com
 
-    - pebble_projects: # An array of projects to get setup
-      - tintin
-      - libpebble-dev
-      - libpebble2-dev
-      - pebble-tool-dev
+    # Projects
+    project_dir: ~/dev
+    projects: # An array of projects to get setup
+      - name: tintin
+        pip: true
+        requirements_file: requirements-osx.txt
+      - name: libpebble-dev
+        pip: true
+      - name: libpebble2-dev
+        pip: true
+      - name: pebble-tool-dev
+        pip: true
+
+    # CLion
+    clion_use_native_clipboard: true
+
+    # Sublime
+    sublime_text_color_scheme: "Packages/Color Scheme - Default/Monokai.tmTheme"
+    sublime_text_theme: "Default.sublime-theme"
+    sublime_packages:
+      - dest: "Modific"
+        repo: "https://github.com/gornostal/Modific"
+        version: "master"
+      - dest: "AdvancedNewFile"
+        repo: "https://github.com/skuroda/Sublime-AdvancedNewFile"
+        version: "master"
+      - dest: "Git"
+        repo: "https://github.com/kemayo/sublime-text-git"
+        version: "master"
+      - dest: InsertNums
+        repo: "https://github.com/jbrooksuk/InsertNums"
+        version: "master"
+      - dest: "PrettyJSON"
+        repo: "https://github.com/dzhibas/SublimePrettyJson"
+        version: "master"
+      - dest: "TrailingSpaces"
+        repo: "https://github.com/SublimeText/TrailingSpaces"
+        version: "master"
+      - dest: "TableEditor"
+        repo: "https://github.com/vkocubinsky/SublimeTableEditor"
+        version: "master"
+      - dest: "GenerateUUID"
+        repo: "https://github.com/SublimeText/GenerateUUID"
+        version: "master"
+      - dest: "BracketHighlighter"
+        repo: "https://github.com/facelessuser/BracketHighlighter.git"
+        version: "master"
+      - dest: "ApplySyntax"
+        repo: "https://github.com/facelessuser/ApplySyntax.git"
+        version: "master"
+      - dest: "SublimeAllAutocomplete"
+        repo: "https://github.com/alienhard/SublimeAllAutocomplete"
+        version: "master"
+      - dest: "Ansible"
+        repo: "https://github.com/clifford-github/sublime-ansible"
+        version: "master"
 
   tasks:
     - name: homebrew taps
@@ -64,35 +81,34 @@
         - caskroom/versions
 
     - name: homebrew installations
-      homebrew: name={{item}} state=present
+      homebrew: name={{item}} state=present update_homebrew=yes
       with_items:
-        - wget
-        - fzf
-        - rename
-        - python
-        - tree
-        - z
-        - zsh
-        - fpp
-        - curl
-        - heroku-toolbelt
-        - vim
-        - git-extras
-        - doxygen
-        - freetype
-        - llvm
-        - libgit2
-        - pypy
-        - gettext
-        - lcov
         - cppcheck
         - curl
+        - curl
+        - doxygen
         - dpkg
-        - trash
-        - node
-        - ngrok
+        - fpp
+        - freetype
+        - fzf
+        - gettext
+        - git-extras
+        - heroku-toolbelt
         - imagemagick
-        - arm-none-eabi-gcc
+        - lcov
+        - libgit2
+        - llvm
+        - ngrok
+        - node
+        - pypy
+        - python
+        - rename
+        - trash
+        - tree
+        - vim
+        - wget
+        - z
+        - zsh
     - name: homebrew cask installations
       homebrew_cask: name={{item}} state=present
       with_items:
@@ -100,26 +116,274 @@
         - alfred
         - appcleaner
         - bettertouchtool
+        - clion
         - cyberduck
         - dropbox
+        - evernote
         - firefox-beta
         - flux
         - gimp
         - google-chrome
+        - iterm2-beta
+        - google-hangouts
+        - logitech-control-center
         - plug
         - spotify
-        - logitech-control-center
-        - evernote
-        - iterm2-beta
+        - transmission
         - virtualbox
         - virtualbox-extension-pack
-        - clion
         - viscosity
-        - transmission
 
     - name: Create development folder
-      file: path={{ dev_dir }} state=directory
+      file: path={{ project_dir }} state=directory
 
     - name: Clone Pebble projects
-      git: repo=git@github.com:pebble/{{ item }}.git dest={{ dev_dir }}/{{ item }}
-      with_items: pebble_projects
+      git: repo=git@github.com:pebble/{{ item.name }}.git dest={{ project_dir }}/{{ item.name }} update=no
+      with_items: projects
+
+    - name: Init pip projects
+      pip: requirements={{ project_dir }}/{{ item.name }}/{{ item.requirements_file|default("requirements.txt") }}
+      with_items: projects
+      when: item.pip
+
+    - name: Configure Mac OS X default values
+      osx_defaults:
+      #########
+      # Dock  #
+      #########
+
+      # Set the icon size of Dock items to 36 pixels
+      - domain: 'defaults write com.apple.dock'
+        key: 'tilesize'
+        type: int
+        value: 36
+      # Dock magnification
+      - domain: com.apple.dock
+        key: magnification
+        type: bool
+        value: false
+      # Automatically hide and show the Dock
+      - domain: 'com.apple.dock'
+        key: 'autohide'
+        type: boolean
+        value: true
+      # Remove the animation when hiding/showing the Dock
+      - domain: 'defaults write com.apple.dock'
+        key: 'autohide-time-modifier'
+        type: float
+        value: 0
+      # Remove the auto-hiding Dock delay
+      - domain: 'defaults write com.apple.dock'
+        key: 'autohide-delay'
+        type: float
+        value: 0
+      # Minimize windows into their application’s icon
+      - domain: 'com.apple.dock'
+        key: 'minimize-to-application'
+        type: bool
+        value: true
+      # Minimization effect: 'genie', 'scale', 'suck'
+      - domain: 'com.apple.dock'
+        key: mineffect
+        type: string
+        value: 'scale'
+      # Show indicator lights for open applications
+      - domain: 'com.apple.dock'
+        key: 'show-process-indicators'
+        type: boolean
+        value: true
+      # Make Dock icons of hidden applications translucent
+      - domain: 'com.apple.dock'
+        key: 'showhidden'
+        type: bool
+        value: true
+      # Don’t animate opening applications from the Dock
+      - domain: 'com.apple.dock'
+        key: 'launchanim'
+        type: bool
+        value: false
+      # Dock orientation: 'left', 'bottom', 'right'
+      - domain: 'com.apple.dock'
+        key: 'orientation'
+        type: string
+        value: bottom
+      # Dock pinning: 'start', 'middle', 'end'
+      - domain: 'com.apple.dock'
+        key: 'pinning'
+        type: string
+        value: middle
+      # Enable spring loading for all Dock items
+      - domain: 'com.apple.dock'
+        key: 'enable-spring-load-actions-on-all-items'
+        type: bool
+        value: true
+
+      ####################
+      # General UI/UX
+      ####################
+
+      # Disable Resume system-wide
+      - domain: 'NSGlobalDomain'
+        key: 'NSQuitAlwaysKeepsWindows'
+        type: boolean
+        value: false
+      # Set sidebar icon size to medium
+      - domain: 'NSGlobalDomain'
+        key: 'NSTableViewDefaultSizeMode'
+        type: integer
+        value: 1
+        # When to show scrollbars: 'WhenScrolling', 'Automatic' and 'Always'
+      - domain: 'NSGlobalDomain'
+        key: 'AppleShowScrollBars'
+        type: string
+        value: 'Always'
+      # Expand save panel by default
+      - domain: 'NSGlobalDomain'
+        key: 'NSNavPanelExpandedStateForSaveMode'
+        type: bool
+        value: true
+      # Expand print panel by default
+      - domain: 'NSGlobalDomain'
+        key: 'PMPrintingExpandedStateForPrint'
+        type: boolean
+        value: true
+      # Automatically quit printer app once the print jobs complete
+      - domain: 'com.apple.print.PrintingPrefs'
+        key: 'Quit When Finished'
+        type: boolean
+        value: true
+      # Save to disk (not to iCloud) by default
+      - domain: 'NSGlobalDomain'
+        key: 'NSDocumentSaveNewDocumentsToCloud'
+        type: bool
+        value: false
+      # Disable smart quotes as they’re annoying when typing code
+      - domain: NSGlobalDomain
+        key: NSAutomaticQuoteSubstitutionEnabled
+        type: bool
+        value: false
+      # Disable smart dashes as they’re annoying when typing code
+      - domain: 'NSGlobalDomain'
+        key: 'NSAutomaticDashSubstitutionEnabled'
+        type: bool
+        key: false
+      # Show battery percentage
+      - domain: 'com.apple.menuextra.battery'
+        key: 'ShowPercent'
+        type: string
+        value: 'YES'
+
+      ################
+      # Input
+      ################
+
+      # Disable press-and-hold for keys in favor of key repeat
+      - domain: 'NSGlobalDomain'
+        key: 'ApplePressAndHoldEnabled'
+        type: bool
+        value: false
+      # Set a blazingly fast keyboard repeat rate
+      - domain: 'NSGlobalDomain'
+        key: 'KeyRepeat'
+        type: integer
+        value: 2
+      # Set delay until key repeats
+      - domain: 'NSGlobalDomain'
+        key: 'InitialKeyRepeat'
+        type: integer
+        value: 15
+      # Trackpad: enable tap to click for this user
+      - domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad'
+        key: 'Clicking'
+        type: bool
+        value: true
+      # Trackpad: enable tap to click for this user (2)
+      - domain: 'NSGlobalDomain'
+        key: com.apple.mouse.tapBehavior
+        type: int
+        value: 1
+      # Enable full keyboard access for all controls
+      # (e.g. enable Tab in modal dialogs)
+      - domain: 'NSGlobalDomain'
+        key: 'AppleKeyboardUIMode'
+        type: int
+        value: 3
+
+      ##############
+      # Screen
+      ##############
+
+      # Disable shadow in screenshots
+      - domain: 'com.apple.screencapture'
+        key: 'disable-shadow'
+        type: bool
+        value: true
+      # Set screenshot format
+      - domain: 'com.apple.screencapture'
+        key: 'type'
+        type: string
+        value: png
+      # Use scroll gesture with the Ctrl (^) modifier key to zoom
+      - domain: 'com.apple.universalaccess'
+        key: 'closeViewScrollWheelToggle'
+        type: bool
+        value: true
+      # Use scroll gesture with the Ctrl (^) modifier key to zoom (2)
+      - domain: 'com.apple.universalaccess'
+        key: 'HIDScrollZoomModifierMask'
+        type: int
+        value: 262144
+
+      ###############
+      # Finder
+      ###############
+      # Enable column view by default in Finder.
+      - domain: 'com.apple.finder'
+        key: 'FXPreferredViewStyle'
+        type: string
+        value: "clmv"
+      # Avoid created ".DS_Store" files on network devices
+      - domain: 'com.apple.desktopservices'
+        key: 'DSDontWriteNetworkStores'
+        type: boolean
+        value: true
+      # Finder: show hidden files by default
+      - domain: 'com.apple.finder'
+        key: 'AppleShowAllFiles'
+        type: bool
+        value: true
+      # Finder: show all filename extensions
+      - domain: 'NSGlobalDomain'
+        key: 'AppleShowAllExtensions'
+        type: bool
+        value: true
+      # Finder: show status bar
+      - domain: 'com.apple.finder'
+        key: 'ShowStatusBar'
+        type: bool
+        value: true
+      # Finder: show path bar
+      - domain: 'com.apple.finder'
+        key: 'ShowPathbar'
+        type: bool
+        value: true
+      # Display full POSIX path as Finder window title
+      - domain: 'com.apple.finder'
+        key: '_FXShowPosixPathInTitle'
+        type: bool
+        value: true
+      # When performing a search, search the current folder by default
+      - domain: com.apple.finder
+        key: 'FXDefaultSearchScope'
+        type: string
+        value: "SCcf"
+      # Enable spring loading for directories
+      - domain: 'NSGlobalDomain'
+        key: 'com.apple.springing.enabled'
+        type: bool
+        value: true
+      # Remove the spring loading delay for directories
+      - domain: 'NSGlobalDomain'
+        key: 'com.apple.springing.delay'
+        type: float
+        value: 0

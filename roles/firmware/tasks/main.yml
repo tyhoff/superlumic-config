@@ -1,0 +1,21 @@
+---
+
+- name: homebrew taps
+  homebrew_tap: name={{item}} state=present
+  with_items:
+    - pebble/pebble-fw
+
+- name: Create .pip folder
+  file: path=~/.pip/ state=directory
+
+- name: Setyp pypi
+  copy: src=pip.conf dest=~/.pip/pip.conf
+
+# - name: Install brew firmware utilities
+#   homebrew: name={{item}} state=present update_homebrew=yes
+#   with_items:
+#   - pebble-qemu-dev
+#   - pebble-openocd
+#   - libphutil
+#   - arcanist
+#   - arm-none-eabi-gcc

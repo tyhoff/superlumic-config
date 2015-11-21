@@ -1,0 +1,11 @@
+---
+- name: install clion
+  homebrew_cask: name={{ item }} state=present
+  with_items:
+    - clion
+
+- name: render the vmoptions file
+  template: src=clion.vmoptions.j2 dest="~/Library/Preferences/clion12/clion.vmoptions" backup=yes
+
+- name: render the idea.propertiess file
+  template: src=idea.properties.j2 dest="~/Library/Preferences/clion12/idea.properties" backup=yes
