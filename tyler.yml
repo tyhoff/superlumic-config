@@ -75,81 +75,8 @@
         repo: "https://github.com/clifford-github/sublime-ansible"
         version: "master"
 
-  tasks:
-    - name: homebrew taps
-      homebrew_tap: name={{item}} state=present
-      with_items:
-        - pebble/pebble-fw
-        - caskroom/versions
-
-    - name: homebrew installations
-      homebrew: name={{item}} state=present update_homebrew=yes
-      with_items:
-        - cppcheck
-        - curl
-        - curl
-        - doxygen
-        - dpkg
-        - fpp
-        - freetype
-        - fzf
-        - gettext
-        - git-extras
-        - heroku-toolbelt
-        - imagemagick
-        - lcov
-        - libgit2
-        - llvm
-        - ngrok
-        - node
-        - pypy
-        - python
-        - rename
-        - trash
-        - tree
-        - vim
-        - wget
-        - z
-        - zsh
-    - name: homebrew cask installations
-      homebrew_cask: name={{item}} state=present
-      with_items:
-        - 1password
-        - alfred
-        - appcleaner
-        - bettertouchtool
-        - clion
-        - cyberduck
-        - dropbox
-        - evernote
-        - firefox-beta
-        - flux
-        - gimp
-        - google-chrome
-        - iterm2-beta
-        - google-hangouts
-        - logitech-control-center
-        - plug
-        - spotify
-        - transmission
-        - virtualbox
-        - virtualbox-extension-pack
-        - viscosity
-
-    - name: Create development folder
-      file: path={{ project_dir }} state=directory
-
-    - name: Clone Pebble projects
-      git: repo=git@github.com:pebble/{{ item.name }}.git dest={{ project_dir }}/{{ item.name }} update=no
-      with_items: projects
-
-    - name: Init pip projects
-      pip: requirements={{ project_dir }}/{{ item.name }}/{{ item.requirements_file|default("requirements.txt") }}
-      with_items: projects
-      when: item.pip
-
-    - name: Configure Mac OS X default values
-      osx_defaults:
+    # Mac OS X Config
+    osx_defaults:
       #########
       # Dock  #
       #########
@@ -389,3 +316,76 @@
         key: 'com.apple.springing.delay'
         type: float
         value: 0
+
+  tasks:
+    - name: homebrew taps
+      homebrew_tap: name={{item}} state=present
+      with_items:
+        - pebble/pebble-fw
+        - caskroom/versions
+
+    - name: homebrew installations
+      homebrew: name={{item}} state=present update_homebrew=yes
+      with_items:
+        - cppcheck
+        - curl
+        - curl
+        - doxygen
+        - dpkg
+        - fpp
+        - freetype
+        - fzf
+        - gettext
+        - git-extras
+        - heroku-toolbelt
+        - imagemagick
+        - lcov
+        - libgit2
+        - llvm
+        - ngrok
+        - node
+        - pypy
+        - python
+        - rename
+        - trash
+        - tree
+        - vim
+        - wget
+        - z
+        - zsh
+    - name: homebrew cask installations
+      homebrew_cask: name={{item}} state=present
+      with_items:
+        - 1password
+        - alfred
+        - appcleaner
+        - bettertouchtool
+        - clion
+        - cyberduck
+        - dropbox
+        - evernote
+        - firefox-beta
+        - flux
+        - gimp
+        - google-chrome
+        - iterm2-beta
+        - google-hangouts
+        - logitech-control-center
+        - plug
+        - spotify
+        - transmission
+        - virtualbox
+        - virtualbox-extension-pack
+        - viscosity
+
+    - name: Create development folder
+      file: path={{ project_dir }} state=directory
+
+    - name: Clone Pebble projects
+      git: repo=git@github.com:pebble/{{ item.name }}.git dest={{ project_dir }}/{{ item.name }} update=no
+      with_items: projects
+
+    - name: Init pip projects
+      pip: requirements={{ project_dir }}/{{ item.name }}/{{ item.requirements_file|default("requirements.txt") }}
+      with_items: projects
+      when: item.pip
