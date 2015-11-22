@@ -9,7 +9,7 @@
     - roderik.superlumic-osx-defaults
     - clion
     - gitconfig
-    - firmware
+    # - firmware
 
   vars:
     computername: applez
@@ -21,9 +21,9 @@
     # Projects
     project_dir: ~/dev
     projects: # An array of projects to get setup
-      - name: tintin
-        pip: true
-        requirements_file: requirements-osx.txt
+      # - name: tintin
+      #   pip: true
+      #   requirements_file: requirements-osx.txt
       - name: libpebble-dev
         pip: true
       - name: libpebble2-dev
@@ -35,8 +35,6 @@
     clion_use_native_clipboard: true
 
     # Sublime
-    sublime_text_color_scheme: "Packages/Color Scheme - Default/Monokai.tmTheme"
-    sublime_text_theme: "Default.sublime-theme"
     sublime_packages:
       - dest: "Modific"
         repo: "https://github.com/gornostal/Modific"
@@ -328,7 +326,6 @@
       homebrew: name={{item}} state=present update_homebrew=yes
       with_items:
         - cppcheck
-        - curl
         - curl
         - doxygen
         - dpkg
