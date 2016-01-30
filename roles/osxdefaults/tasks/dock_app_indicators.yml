@@ -1,0 +1,8 @@
+---
+# Show indicator lights for open applications
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'show-process-indicators'
+    type: boolean
+    value: true
+  notify: kill dock

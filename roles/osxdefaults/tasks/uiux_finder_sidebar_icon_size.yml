@@ -1,0 +1,7 @@
+---
+# Set sidebar icon size to medium
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSTableViewDefaultSizeMode'
+    type: integer
+    value: "1"

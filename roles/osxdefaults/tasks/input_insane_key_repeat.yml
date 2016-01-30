@@ -1,0 +1,21 @@
+---
+# Disable press-and-hold for keys in favor of key repeat
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'ApplePressAndHoldEnabled'
+    type: bool
+    value: false
+
+# Set a blazingly fast keyboard repeat rate
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'KeyRepeat'
+    type: integer
+    value: "2"
+
+# Set delay until key repeats
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'InitialKeyRepeat'
+    type: integer
+    value: "15"

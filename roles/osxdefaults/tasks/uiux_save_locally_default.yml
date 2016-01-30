@@ -1,0 +1,7 @@
+---
+# Save to disk (not to iCloud) by default
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSDocumentSaveNewDocumentsToCloud'
+    type: bool
+    value: false

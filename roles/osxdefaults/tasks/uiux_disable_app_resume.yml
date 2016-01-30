@@ -1,0 +1,7 @@
+---
+# Disable Resume system-wide
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSQuitAlwaysKeepsWindows'
+    type: boolean
+    value: false

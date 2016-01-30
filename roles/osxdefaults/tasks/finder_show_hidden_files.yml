@@ -1,0 +1,8 @@
+---
+# Finder: show hidden files by default
+- osx_defaults:
+    domain: 'com.apple.finder'
+    key: 'AppleShowAllFiles'
+    type: bool
+    value: true
+  notify: kill finder

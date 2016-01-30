@@ -1,0 +1,7 @@
+---
+# When to show scrollbars: 'WhenScrolling', 'Automatic' and 'Always'
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'AppleShowScrollBars'
+    type: string
+    value: 'Always'

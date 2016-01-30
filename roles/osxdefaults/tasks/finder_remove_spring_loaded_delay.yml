@@ -1,0 +1,8 @@
+---
+# Remove the spring loading delay for directories
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'com.apple.springing.delay'
+    type: float
+    value: "0"
+  notify: kill finder

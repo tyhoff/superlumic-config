@@ -1,0 +1,8 @@
+---
+# Enable spring loading for all Dock items
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'enable-spring-load-actions-on-all-items'
+    type: bool
+    value: true
+  notify: kill dock

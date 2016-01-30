@@ -1,0 +1,8 @@
+---
+# Avoid created ".DS_Store" files on network devices
+- osx_defaults:
+    domain: 'com.apple.desktopservices'
+    key: 'DSDontWriteNetworkStores'
+    type: boolean
+    value: true
+  notify: kill finder

@@ -1,0 +1,13 @@
+---
+# Use scroll gesture with the Ctrl (^) modifier key to zoom
+- osx_defaults:
+    domain: 'com.apple.universalaccess'
+    key: 'closeViewScrollWheelToggle'
+    type: bool
+    value: true
+
+- osx_defaults:
+    domain: 'com.apple.universalaccess'
+    key: 'closeViewSmoothImages'
+    type: bool
+    value: false

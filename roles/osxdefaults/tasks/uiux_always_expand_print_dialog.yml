@@ -1,0 +1,7 @@
+---
+# Expand print panel by default
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'PMPrintingExpandedStateForPrint'
+    type: boolean
+    value: true

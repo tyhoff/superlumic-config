@@ -1,0 +1,7 @@
+---
+# Set screenshot format
+- osx_defaults:
+    domain: 'com.apple.screencapture'
+    key: 'type'
+    type: string
+    value: png

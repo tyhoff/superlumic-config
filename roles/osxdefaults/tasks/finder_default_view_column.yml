@@ -1,0 +1,8 @@
+---
+# Enable column view by default in Finder.
+- osx_defaults:
+    domain: 'com.apple.finder'
+    key: 'FXPreferredViewStyle'
+    type: string
+    value: "clmv"
+  notify: kill finder

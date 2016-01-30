@@ -1,0 +1,11 @@
+---
+# Dock orientation: 'left', 'bottom', 'right'
+- fail: msg="Orientation must be one of [left, bottom, right]"
+  when: value not in ["left", "bottom", "right"]
+
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'orientation'
+    type: string
+    value: "{{ value }}"
+  notify: kill dock

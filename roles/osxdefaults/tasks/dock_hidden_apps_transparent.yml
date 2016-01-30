@@ -1,0 +1,8 @@
+---
+# Make Dock icons of hidden applications translucent
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'showhidden'
+    type: bool
+    value: true
+  notify: kill dock

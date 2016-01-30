@@ -1,0 +1,25 @@
+---
+
+# Don’t animate opening applications from the Dock
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'launchanim'
+    type: bool
+    value: false
+  notify: kill dock
+
+# Remove the auto-hiding Dock delay
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'autohide-delay'
+    type: int
+    value: "0"
+  notify: kill dock
+
+# Remove the animation when hiding/showing the Dock
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'autohide-time-modifier'
+    type: int
+    value: "0"
+  notify: kill dock

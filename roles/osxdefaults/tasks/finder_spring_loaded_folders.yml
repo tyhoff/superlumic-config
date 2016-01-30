@@ -1,0 +1,8 @@
+---
+# Enable spring loading for directories
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'com.apple.springing.enabled'
+    type: bool
+    value: true
+  notify: kill finder

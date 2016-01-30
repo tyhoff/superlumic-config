@@ -1,0 +1,8 @@
+---
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'tilesize'
+    type: int
+    # default: 58
+    value: "{{ value }}"
+  notify: kill dock

@@ -1,0 +1,8 @@
+---
+# Finder: show all filename extensions
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'AppleShowAllExtensions'
+    type: bool
+    value: true
+  notify: kill finder

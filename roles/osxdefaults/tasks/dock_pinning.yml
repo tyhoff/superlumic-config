@@ -1,0 +1,11 @@
+---
+# Dock pinning: 'start', 'middle', 'end'
+- fail: msg="Pinning must be one of [start, middle, end]"
+  when: value not in ["start", "middle", "end"]
+
+- osx_defaults:
+    domain: 'com.apple.dock'
+    key: 'pinning'
+    type: string
+    value: "{{ value }}"
+  notify: kill dock

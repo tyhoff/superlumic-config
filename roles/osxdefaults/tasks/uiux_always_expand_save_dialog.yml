@@ -1,0 +1,7 @@
+---
+# Expand save panel by default
+- osx_defaults:
+    domain: 'NSGlobalDomain'
+    key: 'NSNavPanelExpandedStateForSaveMode'
+    type: bool
+    value: true

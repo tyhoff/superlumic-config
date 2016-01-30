@@ -1,0 +1,7 @@
+---
+# Disable shadow in screenshots
+- osx_defaults:
+    domain: 'com.apple.screencapture'
+    key: 'disable-shadow'
+    type: bool
+    value: true

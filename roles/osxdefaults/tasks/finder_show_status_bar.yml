@@ -1,0 +1,8 @@
+---
+# Finder: show status bar
+- osx_defaults:
+    domain: 'com.apple.finder'
+    key: 'ShowStatusBar'
+    type: bool
+    value: true
+  notify: kill finder

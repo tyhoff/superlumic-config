@@ -1,0 +1,16 @@
+---
+# Finder: show path bar
+- osx_defaults:
+    domain: 'com.apple.finder'
+    key: 'ShowPathbar'
+    type: bool
+    value: true
+  notify: kill finder
+
+# Display full POSIX path as Finder window title
+- osx_defaults:
+    domain: 'com.apple.finder'
+    key: '_FXShowPosixPathInTitle'
+    type: bool
+    value: true
+  notify: kill finder
