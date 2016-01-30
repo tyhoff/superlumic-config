@@ -1,0 +1,16 @@
+---
+- name: homebrew taps
+  homebrew_tap: name={{item}} state=present
+  with_items:
+    - pebble/pebble-fw
+    - caskroom/versions
+
+- name: update homebrew taps
+  homebrew: update_homebrew=yes
+
+- name: homebrew cask installations
+  homebrew_cask: name={{item}} state=present
+  with_items:
+    - dropbox
+    - google-hangouts
+    - tunnelblick

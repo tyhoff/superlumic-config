@@ -11,11 +11,20 @@
 - name: Setyp pypi
   copy: src=pip.conf dest=~/.pip/pip.conf
 
-# - name: Install brew firmware utilities
-#   homebrew: name={{item}} state=present update_homebrew=yes
-#   with_items:
-#   - pebble-qemu-dev
-#   - pebble-openocd
-#   - libphutil
-#   - arcanist
-#   - arm-none-eabi-gcc
+- name: Install brew firmware utilities
+  homebrew: name={{item}} state=present update_homebrew=yes
+  with_items:
+  - pebble-qemu-dev
+  - pebble-openocd
+  - libphutil
+  - arcanist
+  - arm-none-eabi-gcc
+  - freetype
+  - gettext
+  - cppcheck
+  - pypy
+  - lcov
+  - libgit2
+  - llvm
+  - git-extras
+

@@ -4,11 +4,14 @@
   connection: local
 
   roles:
-    # - roderik.superlumic-sublimetext
-    # TODO: Replace with osx_defaults extras module when Ansible 2.0 is released.
-    - roderik.superlumic-osx-defaults
-    - clion
-    - gitconfig
+    # # SHOULD STAY
+    # - common
+    # - gitconfig
+
+    # # Choose these
+    # - sublimetext
+    # - clion
+    - osx_defaults
     # - firmware
 
   vars:
@@ -21,9 +24,9 @@
     # Projects
     project_dir: ~/dev
     projects: # An array of projects to get setup
-      # - name: tintin
-      #   pip: true
-      #   requirements_file: requirements-osx.txt
+      - name: tintin
+        pip: true
+        requirements_file: requirements-osx.txt
       - name: libpebble-dev
         pip: true
       - name: libpebble2-dev
@@ -63,9 +66,6 @@
       - dest: "BracketHighlighter"
         repo: "https://github.com/facelessuser/BracketHighlighter.git"
         version: "master"
-      - dest: "ApplySyntax"
-        repo: "https://github.com/facelessuser/ApplySyntax.git"
-        version: "master"
       - dest: "SublimeAllAutocomplete"
         repo: "https://github.com/alienhard/SublimeAllAutocomplete"
         version: "master"
@@ -73,275 +73,54 @@
         repo: "https://github.com/clifford-github/sublime-ansible"
         version: "master"
 
-    # Mac OS X Config
-    osx_defaults:
-      #########
-      # Dock  #
-      #########
-
-      # Set the icon size of Dock items to 36 pixels
-      - domain: 'defaults write com.apple.dock'
-        key: 'tilesize'
-        type: int
-        value: 36
-      # Dock magnification
-      - domain: com.apple.dock
-        key: magnification
-        type: bool
-        value: false
-      # Automatically hide and show the Dock
-      - domain: 'com.apple.dock'
-        key: 'autohide'
-        type: boolean
-        value: true
-      # Remove the animation when hiding/showing the Dock
-      - domain: 'defaults write com.apple.dock'
-        key: 'autohide-time-modifier'
-        type: float
-        value: 0
-      # Remove the auto-hiding Dock delay
-      - domain: 'defaults write com.apple.dock'
-        key: 'autohide-delay'
-        type: float
-        value: 0
-      # Minimize windows into their application’s icon
-      - domain: 'com.apple.dock'
-        key: 'minimize-to-application'
-        type: bool
-        value: true
-      # Minimization effect: 'genie', 'scale', 'suck'
-      - domain: 'com.apple.dock'
-        key: mineffect
-        type: string
-        value: 'scale'
-      # Show indicator lights for open applications
-      - domain: 'com.apple.dock'
-        key: 'show-process-indicators'
-        type: boolean
-        value: true
-      # Make Dock icons of hidden applications translucent
-      - domain: 'com.apple.dock'
-        key: 'showhidden'
-        type: bool
-        value: true
-      # Don’t animate opening applications from the Dock
-      - domain: 'com.apple.dock'
-        key: 'launchanim'
-        type: bool
-        value: false
-      # Dock orientation: 'left', 'bottom', 'right'
-      - domain: 'com.apple.dock'
-        key: 'orientation'
-        type: string
-        value: bottom
-      # Dock pinning: 'start', 'middle', 'end'
-      - domain: 'com.apple.dock'
-        key: 'pinning'
-        type: string
-        value: middle
-      # Enable spring loading for all Dock items
-      - domain: 'com.apple.dock'
-        key: 'enable-spring-load-actions-on-all-items'
-        type: bool
-        value: true
-
-      ####################
-      # General UI/UX
-      ####################
-
-      # Disable Resume system-wide
-      - domain: 'NSGlobalDomain'
-        key: 'NSQuitAlwaysKeepsWindows'
-        type: boolean
-        value: false
-      # Set sidebar icon size to medium
-      - domain: 'NSGlobalDomain'
-        key: 'NSTableViewDefaultSizeMode'
-        type: integer
-        value: 1
-        # When to show scrollbars: 'WhenScrolling', 'Automatic' and 'Always'
-      - domain: 'NSGlobalDomain'
-        key: 'AppleShowScrollBars'
-        type: string
-        value: 'Always'
-      # Expand save panel by default
-      - domain: 'NSGlobalDomain'
-        key: 'NSNavPanelExpandedStateForSaveMode'
-        type: bool
-        value: true
-      # Expand print panel by default
-      - domain: 'NSGlobalDomain'
-        key: 'PMPrintingExpandedStateForPrint'
-        type: boolean
-        value: true
-      # Automatically quit printer app once the print jobs complete
-      - domain: 'com.apple.print.PrintingPrefs'
-        key: 'Quit When Finished'
-        type: boolean
-        value: true
-      # Save to disk (not to iCloud) by default
-      - domain: 'NSGlobalDomain'
-        key: 'NSDocumentSaveNewDocumentsToCloud'
-        type: bool
-        value: false
-      # Disable smart quotes as they’re annoying when typing code
-      - domain: NSGlobalDomain
-        key: NSAutomaticQuoteSubstitutionEnabled
-        type: bool
-        value: false
-      # Disable smart dashes as they’re annoying when typing code
-      - domain: 'NSGlobalDomain'
-        key: 'NSAutomaticDashSubstitutionEnabled'
-        type: bool
-        value: false
-      # Show battery percentage
-      - domain: 'com.apple.menuextra.battery'
-        key: 'ShowPercent'
-        type: string
-        value: 'YES'
-
-      ################
-      # Input
-      ################
-
-      # Disable press-and-hold for keys in favor of key repeat
-      - domain: 'NSGlobalDomain'
-        key: 'ApplePressAndHoldEnabled'
-        type: bool
-        value: false
-      # Set a blazingly fast keyboard repeat rate
-      - domain: 'NSGlobalDomain'
-        key: 'KeyRepeat'
-        type: integer
-        value: 2
-      # Set delay until key repeats
-      - domain: 'NSGlobalDomain'
-        key: 'InitialKeyRepeat'
-        type: integer
-        value: 15
-      # Trackpad: enable tap to click for this user
-      - domain: 'com.apple.driver.AppleBluetoothMultitouch.trackpad'
-        key: 'Clicking'
-        type: bool
-        value: true
-      # Trackpad: enable tap to click for this user (2)
-      - domain: 'NSGlobalDomain'
-        key: com.apple.mouse.tapBehavior
-        type: int
-        value: 1
-      # Enable full keyboard access for all controls
-      # (e.g. enable Tab in modal dialogs)
-      - domain: 'NSGlobalDomain'
-        key: 'AppleKeyboardUIMode'
-        type: int
-        value: 3
-
-      ##############
-      # Screen
-      ##############
-
-      # Disable shadow in screenshots
-      - domain: 'com.apple.screencapture'
-        key: 'disable-shadow'
-        type: bool
-        value: true
-      # Set screenshot format
-      - domain: 'com.apple.screencapture'
-        key: 'type'
-        type: string
-        value: png
-      # Use scroll gesture with the Ctrl (^) modifier key to zoom
-      - domain: 'com.apple.universalaccess'
-        key: 'closeViewScrollWheelToggle'
-        type: bool
-        value: true
-      # Use scroll gesture with the Ctrl (^) modifier key to zoom (2)
-      - domain: 'com.apple.universalaccess'
-        key: 'HIDScrollZoomModifierMask'
-        type: int
-        value: 262144
-
-      ###############
-      # Finder
-      ###############
-      # Enable column view by default in Finder.
-      - domain: 'com.apple.finder'
-        key: 'FXPreferredViewStyle'
-        type: string
-        value: "clmv"
-      # Avoid created ".DS_Store" files on network devices
-      - domain: 'com.apple.desktopservices'
-        key: 'DSDontWriteNetworkStores'
-        type: boolean
-        value: true
-      # Finder: show hidden files by default
-      - domain: 'com.apple.finder'
-        key: 'AppleShowAllFiles'
-        type: bool
-        value: true
-      # Finder: show all filename extensions
-      - domain: 'NSGlobalDomain'
-        key: 'AppleShowAllExtensions'
-        type: bool
-        value: true
-      # Finder: show status bar
-      - domain: 'com.apple.finder'
-        key: 'ShowStatusBar'
-        type: bool
-        value: true
-      # Finder: show path bar
-      - domain: 'com.apple.finder'
-        key: 'ShowPathbar'
-        type: bool
-        value: true
-      # Display full POSIX path as Finder window title
-      - domain: 'com.apple.finder'
-        key: '_FXShowPosixPathInTitle'
-        type: bool
-        value: true
-      # When performing a search, search the current folder by default
-      - domain: com.apple.finder
-        key: 'FXDefaultSearchScope'
-        type: string
-        value: "SCcf"
-      # Enable spring loading for directories
-      - domain: 'NSGlobalDomain'
-        key: 'com.apple.springing.enabled'
-        type: bool
-        value: true
-      # Remove the spring loading delay for directories
-      - domain: 'NSGlobalDomain'
-        key: 'com.apple.springing.delay'
-        type: float
-        value: 0
-
   tasks:
-    - name: homebrew taps
-      homebrew_tap: name={{item}} state=present
-      with_items:
-        - pebble/pebble-fw
-        - caskroom/versions
+
+    # TODO: Replace with include + with_items when 2.0 ships
+    - include: roles/osx_defaults/tasks/dock_app_indicators.yml
+    - include: roles/osx_defaults/tasks/dock_apps_spring_loaded.yml
+    - include: roles/osx_defaults/tasks/dock_autohide.yml
+    - include: roles/osx_defaults/tasks/dock_hidden_apps_transparent.yml
+    - include: roles/osx_defaults/tasks/dock_icon_size_small.yml
+    - include: roles/osx_defaults/tasks/dock_no_animations.yml
+    - include: roles/osx_defaults/tasks/dock_pinning.yml value=middle
+    - include: roles/osx_defaults/tasks/dock_position.yml value=bottom
+    - include: roles/osx_defaults/tasks/finder_default_view_column.yml
+    - include: roles/osx_defaults/tasks/finder_prevent_dsstore_network_drives.yml
+    - include: roles/osx_defaults/tasks/finder_remove_spring_loaded_delay.yml
+    - include: roles/osx_defaults/tasks/finder_show_all_extensions.yml
+    - include: roles/osx_defaults/tasks/finder_show_file_path_title.yml
+    - include: roles/osx_defaults/tasks/finder_show_hidden_files.yml
+    - include: roles/osx_defaults/tasks/finder_show_status_bar.yml
+    - include: roles/osx_defaults/tasks/finder_spotlight_search_current_folder.yml
+    - include: roles/osx_defaults/tasks/finder_spring_loaded_folders.yml
+    - include: roles/osx_defaults/tasks/input_insane_key_repeat.yml
+    - include: roles/osx_defaults/tasks/input_keyboard_all_controls.yml
+    - include: roles/osx_defaults/tasks/input_tap_to_click.yml
+    - include: roles/osx_defaults/tasks/screenshot_png.yml
+    - include: roles/osx_defaults/tasks/screenshots_disable_shadow.yml
+    - include: roles/osx_defaults/tasks/uiux_always_expand_print_dialog.yml
+    - include: roles/osx_defaults/tasks/uiux_always_expand_save_dialog.yml
+    - include: roles/osx_defaults/tasks/uiux_battery_percentage.yml
+    - include: roles/osx_defaults/tasks/uiux_disable_app_resume.yml
+    - include: roles/osx_defaults/tasks/uiux_disable_smart_typing.yml
+    - include: roles/osx_defaults/tasks/uiux_finder_sidebar_icon_size.yml
+    - include: roles/osx_defaults/tasks/uiux_quit_print_app_when_finished.yml
+    - include: roles/osx_defaults/tasks/uiux_save_locally_default.yml
+    - include: roles/osx_defaults/tasks/uiux_scroll_bars_always.yml
+    - include: roles/osx_defaults/tasks/uiux_zoom_scroll_ctrl_c.yml
 
     - name: homebrew installations
-      homebrew: name={{item}} state=present update_homebrew=yes
+      homebrew: name={{item}} state=present
       with_items:
-        - cppcheck
         - curl
         - doxygen
         - dpkg
         - fpp
-        - freetype
         - fzf
-        - gettext
-        - git-extras
         - heroku-toolbelt
         - imagemagick
-        - lcov
-        - libgit2
-        - llvm
         - ngrok
         - node
-        - pypy
         - python
         - rename
         - trash
@@ -357,23 +136,19 @@
         - alfred
         - appcleaner
         - bettertouchtool
-        - clion
         - cyberduck
-        - dropbox
         - evernote
         - firefox-beta
         - flux
         - gimp
         - google-chrome
         - iterm2-beta
-        - google-hangouts
         - logitech-control-center
         - plug
         - spotify
         - transmission
         - virtualbox
         - virtualbox-extension-pack
-        - viscosity
 
     - name: Create development folder
       file: path={{ project_dir }} state=directory
@@ -382,7 +157,7 @@
       git: repo=git@github.com:pebble/{{ item.name }}.git dest={{ project_dir }}/{{ item.name }} update=no
       with_items: projects
 
-    - name: Init pip projects
-      pip: requirements={{ project_dir }}/{{ item.name }}/{{ item.requirements_file|default("requirements.txt") }}
-      with_items: projects
-      when: item.pip
+    # - name: Init pip projects
+    #   pip: requirements={{ project_dir }}/{{ item.name }}/{{ item.requirements_file|default("requirements.txt") }}
+    #   with_items: projects
+    #   when: item.pip
